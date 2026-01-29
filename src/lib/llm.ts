@@ -1,5 +1,4 @@
 import OpenAI from 'openai';
-import 'dotenv/config';
 import { SuggestionSchema, type Suggestion } from './schema';
 import { z } from 'zod';
 import { CONFIG } from './config';

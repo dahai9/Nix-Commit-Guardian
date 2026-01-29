@@ -1,7 +1,9 @@
+import 'dotenv/config';
+
 export const CONFIG = {
-    LLMLITE_BASE_URL: process.env.LLMLITE_BASE_URL || 'http://localhost:8000/v1',
+    LLMLITE_BASE_URL: process.env.OPENAI_BASE_URL || 'http://localhost:8000/v1',
     API_KEY: process.env.OPENAI_API_KEY || 'sk-default-key',
-    MODEL: 'cerebras/gpt-oss-120b',
+    MODEL: process.env.OPENAI_MODEL || 'cerebras/gpt-oss-120b',
     SYSTEM_PROMPT: `You are a NixOS expert. Analyze this git diff and suggest a commit message.
 Return ONLY a JSON object with these fields (no markdown, no extra text):
 {
