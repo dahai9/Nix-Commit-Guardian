@@ -15,6 +15,9 @@
         version = "1.0.0";
         src = ./.;
 
+        # Avoid re-fetching on git dirty state
+        FORCE_GIT_SOURCE = "1";
+
         buildInputs = with pkgs; [
           nodejs_20
           pnpm
@@ -22,7 +25,7 @@
 
         buildPhase = ''
           # 使用 pnpm 安装依赖
-          pnpm install --frozen-lockfile
+          pnpm install --frozen-lockfile --offline || pnpm install --frozen-lockfile
           # 编译 TypeScript
           pnpm run build
         '';
