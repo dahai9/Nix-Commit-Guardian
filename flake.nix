@@ -10,25 +10,32 @@
       pkgs = import nixpkgs { inherit system; };
     in
     {
-      packages.${system}.default = pkgs.buildNpmPackage {
+      packages.${system}.default = pkgs.stdenv.mkDerivation {
         name = "nix-commit-guardian";
         version = "1.0.0";
         src = ./.;
 
-        npmDepsHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+        buildInputs = with pkgs; [
+          nodejs_20
+          pnpm
+        ];
 
         buildPhase = ''
-          npm run build
+          # 使用 pnpm 安装依赖
+          pnpm install --frozen-lockfile
+          # 编译 TypeScript
+          pnpm run build
         '';
 
         installPhase = ''
-          mkdir -p $out/bin $out/lib/node_modules/nix-commit-guardian/dist
-          cp -r dist/* $out/lib/node_modules/nix-commit-guardian/dist/
+          mkdir -p $out/bin $out/lib/node_modules/nix-commit-guardian
+          cp -r dist $out/lib/node_modules/nix-commit-guardian/
           cp -r node_modules $out/lib/node_modules/nix-commit-guardian/
 
+          # 创建可执行文件
           cat > $out/bin/nix-commit-guardian << 'EOF'
           #!/bin/sh
-          exec ${pkgs.nodejs}/bin/node $out/lib/node_modules/nix-commit-guardian/dist/index.js "$@"
+          exec ${pkgs.nodejs_20}/bin/node $out/lib/node_modules/nix-commit-guardian/dist/index.js "$@"
           EOF
           chmod +x $out/bin/nix-commit-guardian
         '';
