@@ -1,4 +1,15 @@
-# Agent Guidelines for Nix Commit Guardian
+# Nix Commit Guardian
+
+Nix Commit Guardian is an AI-powered commit message generator specifically designed for NixOS configuration repositories. It automatically analyzes Git staged changes and leverages Large Language Models (LLMs) to generate structured, descriptive, and compliant commit suggestions.
+
+### Key Features
+
+- **Smart Diff Analysis**: Automatically extracts and analyzes Git staged changes.
+- **AI-Powered**: Integrates with OpenAI API to generate commit types, summaries, and reasoning based on actual changes.
+- **Structured Output**: Uses Zod for strict schema validation to ensure consistent and reliable commit messages.
+- **Nix Ecosystem Integration**: Native Nix Flake support for a consistent development and build environment.
+
+---
 
 ## 🔧 NixOS Flake Development Workflow
 
