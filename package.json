@@ -1,7 +1,7 @@
 {
-  "name": "ts-todo-cli",
+  "name": "nix-commit-guardian",
   "version": "1.0.0",
-  "description": "",
+  "description": "An AI-powered commit message generator for NixOS configurations",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
